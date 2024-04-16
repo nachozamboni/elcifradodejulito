@@ -11,12 +11,14 @@ class Program {
           Console.WriteLine("Ingrese un mensaje no vacio");
           msj1 = Console.ReadLine();
       }
+      Console.WriteLine("Ingrese la distancia de cifrado");
+      int distancia = int.Parse(Console.ReadLine());
       Program program = new Program();
       Console.WriteLine("Mensaje cifrado: ");
-      Console.WriteLine(program.Cifrar(msj1));
+      Console.WriteLine(program.Cifrar(msj1, distancia));
 
       // -------------------------------------------------
-    
+
       Console.WriteLine("Ingrese la frase a descifrar");
 
       string msj2 = Console.ReadLine();
@@ -25,17 +27,19 @@ class Program {
           Console.WriteLine("Ingrese un mensaje no vacio");
           msj2 = Console.ReadLine();
       }
+      Console.WriteLine("Ingrese la distancia de cifrado");
+      int distancia2 = int.Parse(Console.ReadLine());
       Console.WriteLine("Mensaje descifrado: ");
-      Console.WriteLine(program.Descifrar(msj2));
+      Console.WriteLine(program.Descifrar(msj2,distancia2));
   }
 
-  private string Cifrar(string msj) {
+  private string Cifrar(string msj, int distancia) {
       string aux = "";
 
       foreach (char c in msj) {
           int posicion = alfabeto.IndexOf(c);
           if (posicion != -1) {
-              posicion = (posicion + 7) % alfabeto.Length;
+              posicion = (posicion + distancia) % alfabeto.Length;
               aux += alfabeto[posicion];
         }
         else {
@@ -45,7 +49,7 @@ class Program {
     return aux;
   }
 
-  private string Descifrar(string msj){
+  private string Descifrar(string msj, int distancia){
     string aux = "";
     foreach(char c in msj){
         int posicion = alfabeto.IndexOf(c);
@@ -53,12 +57,12 @@ class Program {
             aux += c;
     }
     else{
-      posicion = (posicion - 7) % alfabeto.Length;
+      posicion = (posicion - distancia) % alfabeto.Length;
       aux += alfabeto[posicion];
     }
-    
+
   }
     return aux;
     }
-    
+
 }
